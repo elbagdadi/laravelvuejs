@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->integer('cat_id')->unsigned()->nullable();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('published_by')->unsigned()->nullable();
+            $table->boolean('is_published')->default(0);
             $table->string('title')->nullable();
             $table->text('text')->nullable();
             $table->string('image')->nullable();
