@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Post::all();
+    }
+
+    public function show(Post $post)
+    {
+        return $post;
     }
 
     /**
@@ -38,16 +38,7 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.

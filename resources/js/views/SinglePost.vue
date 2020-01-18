@@ -1,35 +1,41 @@
 <template>
-  <div class="wrapper">
+<div class="wrapper">
     <Header/>
-      <!-- Page Content -->
+    <!-- Page Content -->
   <div class="container">
 
     <div class="row">
 
-      <!-- Blog Entries Column -->
-      <div class="col-md-8">
-        <!-- Blog Post -->
-        <h4></h4>
-        <div class="card mb-4" v-for="(post, $index) in posts" :key="$index">
-            <img :src="'/storage/images/'+post.image" class="card-img-top" alt="750x300">
-          <div class="card-body">
-            <h2 class="card-title">{{post.title}}</h2>
-            <p class="card-text">{{post.text}}</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-            <router-link :to="{ name: 'post', params: {post: post.id } }">Read More</router-link>
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
 
-          </div>
-          <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
-          </div>
-        </div>
+        <!-- Title -->
+        <h1 class="mt-4">{{post.title}}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a href="#">Start Bootstrap</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on January 1, 2019 at 12:00 PM</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" :src="'/storage/images/'+post.image" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+       {{post.text}}
+    
 
         
 
-
-       
-       
       </div>
 
       <!-- Sidebar Widgets Column -->
@@ -98,30 +104,29 @@
 
   </div>
   <!-- /.container -->
-      <Footer/>
-  </div>
-  
+    <Footer/>
+</div>
 </template>
 <script>
 import Header from "../components/layout/Header.vue"
 import Footer from "../components/layout/Footer.vue"
 import axios from "axios"
-
+import data from "../helpers/commun.json"
 export default {
-  name:"Blog",
-   components:{
+  name:"SinglePost",
+  components:{
             Header,
             Footer
         },
     data () {
       return {
-        posts: null
+        post: null
       }
     },
      mounted () {
       axios
-        .get('api/posts')
-        .then(response => (this.posts = response.data))
+        .get(data.api_url+'posts/'+this.$route.params.post)
+        .then(response => (this.post = response.data))
     }
 }
 </script>

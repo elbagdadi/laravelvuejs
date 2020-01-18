@@ -1,5 +1,13 @@
 const mix = require('laravel-mix');
-
+mix.webpackConfig(webpack => {
+    return {
+        plugins: [
+            new webpack.EnvironmentPlugin (
+                ['MIX_PUBLISH_APP_URL']
+            )
+        ]
+    };
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
